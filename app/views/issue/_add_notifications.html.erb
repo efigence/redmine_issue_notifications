@@ -1,0 +1,37 @@
+<% if User.current.logged? %>
+  <%= link_to 'Notification', '#notify-modal', :class => 'icon icon-add', :id => 'notify-link', :style => "display:none;margin-left:4px;", :rel => "modal:open" %>
+
+    <div id="notify-modal" style="display:none;">
+      <div id="modal-container" style="margin:15px;">
+        <h3>When would you like to be reminded about this issue?</h3>
+        <%= form_for @notification, url: issue_notification_path(@issue) do |f|  %>
+          <%= f.text_field :notify_at, :id => "time-picker" %>
+          <%= f.submit 'Save' %>
+        <% end %>
+
+        <a href="#" rel="modal:close">Close</a>
+      </div>
+    </div>
+
+  <%= javascript_tag do %>
+    $(function() {
+      $('#notify-link').live('click', function(e){
+        e.preventDefault();
+        $('.close-modal').hide();
+      })
+      $('.contextual a.icon:last-child').after( $('#notify-link').show() );
+      $.datepicker.setDefaults({dateFormat: 'yy-mm-dd' });
+      $('#time-picker').datetimepicker();
+    });
+  <% end %>
+
+
+  <% content_for :header_tags do %>
+    <%= javascript_include_tag 'jquery.modal.min.js', :plugin => 'redmine_issue_notifications' %>
+    <%= stylesheet_link_tag 'jquery.modal.css', :plugin => 'redmine_issue_notifications' %>
+
+    <%= javascript_include_tag 'jquery-ui-sliderAccess.js', :plugin => 'redmine_issue_notifications' %>
+    <%= javascript_include_tag 'jquery-ui-timepicker-addon.min.js', :plugin => 'redmine_issue_notifications' %>
+    <%= stylesheet_link_tag 'jquery-ui-timepicker-addon.min.css', :plugin => 'redmine_issue_notifications' %>
+  <% end %>
+<% end %>

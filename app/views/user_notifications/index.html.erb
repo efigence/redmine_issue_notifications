@@ -1,0 +1,21 @@
+<h1>Pending notifications list</h1>
+<table class="list" style="margin-top:10px; width:70%;">
+  <thead>
+    <tr>
+      <th>Notify at</th>
+      <th>Issue</th>
+      <th>Project</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+      <% @notifications.each do |notification| %>
+        <tr style="height:25px;">
+          <td style="width:23%"><%= notification.notify_at.localtime.to_s(:db) %></td>
+          <td style="width:27%"><%= link_to notification.issue.subject, notification.issue %></td>
+          <td style="width:27%"><%= link_to notification.issue.project.name, notification.issue.project %></td>
+          <td style="width:20%"><%= link_to 'delete', destroy_notification_path(id: notification.id), :method => :post, :class => "icon icon-del" %></td>
+        </tr>
+      <% end %>
+  </tbody>
+</table>
