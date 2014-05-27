@@ -1,21 +1,60 @@
-<h1>Pending notifications list</h1>
-<table class="list" style="margin-top:10px; width:70%;">
-  <thead>
-    <tr>
-      <th>Notify at</th>
-      <th>Issue</th>
-      <th>Project</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-      <% @notifications.each do |notification| %>
-        <tr style="height:25px;">
-          <td style="width:23%"><%= notification.notify_at.localtime.to_s(:db) %></td>
-          <td style="width:27%"><%= link_to notification.issue.subject, notification.issue %></td>
-          <td style="width:27%"><%= link_to notification.issue.project.name, notification.issue.project %></td>
-          <td style="width:20%"><%= link_to 'delete', destroy_notification_path(id: notification.id), :method => :post, :class => "icon icon-del" %></td>
-        </tr>
-      <% end %>
-  </tbody>
-</table>
+<div class="splitcontentleft">
+  <h2><%= l('notify.pending_list') %></h2>
+  <table class="list" style="margin-top:10px; width:95%;">
+    <thead>
+      <tr>
+        <th><%= l('notify.notify_at') %></th>
+        <th><%= l('label_issue') %></th>
+        <th><%= l('label_project') %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @pending.each do |notification| %>
+          <tr style="height:25px;">
+            <td style="width:23%"><%= notification.notify_at.localtime.to_s(:db) %></td>
+            <td style="width:27%">
+              <% if notification.issue %>
+                <%= link_to notification.issue.subject, notification.issue %>
+              <% else %>
+                <em><%= l('notify.issue_deleted') %></em>
+              <% end %>
+            </td>
+            <td style="width:27%"><%= link_to notification.issue.project.name, notification.issue.project if notification.issue %></td>
+            <td style="width:20%"><%= link_to l('button_delete'), destroy_notification_path(id: notification.id), :method => :post, :class => "icon icon-del" %></td>
+          </tr>
+        <% end %>
+    </tbody>
+  </table>
+  <p class="pagination" style="padding-top:12px;"><%= pagination_links_full @paginate_pending %></p>
+</div>
+<div class="splitcontentright">
+  <h2><%= t('notify.sent_list') %></h2>
+  <table class="list" style="margin-top:10px; width:95%;">
+    <thead>
+      <tr>
+        <th><%= l('notify.notify_at') %></th>
+        <th><%= l('label_issue') %></th>
+        <th><%= l('label_project') %></th>
+        <th><%= l('notify.jid') %></th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @sent.each do |notification| %>
+          <tr style="height:25px;">
+            <td style="width:23%"><%= notification.notify_at.localtime.to_s(:db) %></td>
+            <td style="width:27%">
+              <% if notification.issue %>
+                <%= link_to notification.issue.subject, notification.issue %>
+              <% else %>
+                <em><%= l('notify.issue_deleted') %></em>
+              <% end %>
+            </td>
+            <td style="width:27%"><%= link_to notification.issue.project.name, notification.issue.project if notification.issue %></td>
+            <td style="width:23%"><%= notification.sidekiq_task_id %></td>
+          </tr>
+        <% end %>
+    </tbody>
+  </table>
+  <p class="pagination" style="padding-top:12px;"><%= pagination_links_full @paginate_sent %></p>
+</div>

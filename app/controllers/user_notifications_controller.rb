@@ -5,13 +5,18 @@ class UserNotificationsController < ApplicationController
   before_filter :find_and_authorize_notification, :only => :destroy
 
   def index
-    @notifications = @user.notifications.pending.order('notify_at ASC').
+    @pending = @user.notifications.pending.order('notify_at ASC').
       includes(:issue).includes(:issue => :project)
+    @paginate_pending, @pending = paginate @pending, :per_page => 15
+
+    @sent = @user.notifications.sent.order('notify_at DESC').
+      includes(:issue).includes(:issue => :project)
+    @paginate_sent, @sent = paginate @sent, :per_page => 15
   end
 
   def destroy
     @notification.destroy
-    flash[:notice] = "Notification deleted!"
+    flash[:notice] = l('notify.flash.deleted')
     redirect_to user_notifications_path(@user)
   end
 

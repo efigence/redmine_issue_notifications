@@ -1,0 +1,16 @@
+pl:
+  notify:
+    notification: Notyfikacja
+    pending_list: Oczekujące notyfikacje
+    sent_list: Wysłane notyfikacje
+    notify_at: Czas powiadomienia
+    issue_deleted: Zagadnienie usunięte
+    jid: JID
+    when: Kiedy chciałbyś otrzymać przypomnienie o tym zagadnieniu?
+    close: Zamknij
+    flash:
+      deleted: Usunięto notyfikację.
+      notice: Notyfikacja została zapisana.
+      error: "Błąd: notyfikacja nie została zapisana."
+    email:
+      basic_subject: "Zagadnienie %{issue} wymaga Twojej uwagi."

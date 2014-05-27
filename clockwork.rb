@@ -14,4 +14,7 @@ module Clockwork
     NotificationScheduleWorker.perform_async
   end
 
+  every(1.month, 'notifications-cleanup.job') do
+    NotificationCleanupWorker.perform_async
+  end
 end

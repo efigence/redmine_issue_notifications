@@ -22,9 +22,9 @@ module RedmineIssueNotifications
               datetime_string.to_time(:local).to_datetime
             end
           if @notification.save
-            flash[:notice] = "Notification saved!"
+            flash[:notice] = l('notify.flash.notice')
           else
-            flash[:error] = "Error: couldn't save notification!"
+            flash[:error] = l('notify.flash.error')
           end
           redirect_to issue_path(@issue)
         end
