@@ -1,13 +1,14 @@
 en:
+  permission_create_notifications: Create notifications
   notify:
     notification: Notification
     pending_list: Pending notifications
     sent_list: Sent notifications
     notify_at: Notify at
+    sent_at: Sent at
     issue_deleted: Issue deleted
     jid: JID
     when: When would you like to be reminded about this issue?
-    close: Close
     flash:
       deleted: Notification deleted.
       notice: Notification saved.

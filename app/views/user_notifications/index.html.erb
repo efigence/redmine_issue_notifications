@@ -33,7 +33,7 @@
   <table class="list" style="margin-top:10px; width:95%;">
     <thead>
       <tr>
-        <th><%= l('notify.notify_at') %></th>
+        <th><%= l('notify.sent_at') %></th>
         <th><%= l('label_issue') %></th>
         <th><%= l('label_project') %></th>
         <th><%= l('notify.jid') %></th>
@@ -42,7 +42,7 @@
     <tbody>
         <% @sent.each do |notification| %>
           <tr style="height:25px;">
-            <td style="width:23%"><%= notification.notify_at.localtime.to_s(:db) %></td>
+            <td style="width:23%"><%= notification.sent_at.localtime.to_s(:db) %></td>
             <td style="width:27%">
               <% if notification.issue %>
                 <%= link_to notification.issue.subject, notification.issue %>

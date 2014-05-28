@@ -5,6 +5,7 @@ class CreateNotifications < ActiveRecord::Migration
       t.integer :issue_id
       t.string :state, :nil => false, :default => "to_be_sent"
       t.datetime :notify_at
+      t.datetime :sent_at
       t.string :sidekiq_task_id
 
       t.timestamps

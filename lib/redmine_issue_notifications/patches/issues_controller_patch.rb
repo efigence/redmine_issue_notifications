@@ -7,12 +7,16 @@ module RedmineIssueNotifications
         base.class_eval do
           unloadable
           base.send(:include, InstanceMethods)
-          skip_before_filter :authorize, :only => :create_notification
+          prepend_before_filter :find_issue_and_project, :only => [:create_notification]
           append_before_filter :set_notification, :only => [:show, :create_notification],
            :if => proc { User.current.logged? }
         end
       end
       module InstanceMethods
+        def find_issue_and_project
+          @issue = Issue.find(params[:id])
+          @project = @issue.project
+        end
         def create_notification
           datetime_string = params[:notification][:notify_at]
           @notification.notify_at =
@@ -29,7 +33,6 @@ module RedmineIssueNotifications
           redirect_to issue_path(@issue)
         end
         def set_notification
-          find_issue
           @notification = @issue.notifications.build(user: User.current)
         end
         private :set_notification

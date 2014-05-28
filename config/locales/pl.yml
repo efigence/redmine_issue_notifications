@@ -1,13 +1,14 @@
 pl:
+  permission_create_notifications: Tworzenie notyfikacji
   notify:
     notification: Notyfikacja
     pending_list: Oczekujące notyfikacje
     sent_list: Wysłane notyfikacje
     notify_at: Czas powiadomienia
+    sent_at: Wysłano
     issue_deleted: Zagadnienie usunięte
     jid: JID
     when: Kiedy chciałbyś otrzymać przypomnienie o tym zagadnieniu?
-    close: Zamknij
     flash:
       deleted: Usunięto notyfikację.
       notice: Notyfikacja została zapisana.

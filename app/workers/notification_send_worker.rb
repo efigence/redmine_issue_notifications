@@ -9,5 +9,6 @@ class NotificationSendWorker
       IssueNotificationMailer.sidekiq_delay.issue_deleted(id)
     end
     notification.update_attribute(:state, "sent")
+    notification.update_attribute(:sent_at, Time.now.to_datetime)
   end
 end
