@@ -1,60 +1,69 @@
-<div class="splitcontentleft">
-  <h2><%= l('notify.pending_list') %></h2>
+<h1><%= l('notify.notifications') %></h1>
+<div class="splitcontentleft" style="width:80%;">
   <table class="list" style="margin-top:10px; width:95%;">
     <thead>
       <tr>
+        <th><%= l('notify.state') %></th>
         <th><%= l('notify.notify_at') %></th>
+        <th><%= l('notify.sent_at') %></th>
         <th><%= l('label_issue') %></th>
-        <th><%= l('label_project') %></th>
+        <th><%= l('notify.jid') %></th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-        <% @pending.each do |notification| %>
-          <tr style="height:25px;">
-            <td style="width:23%"><%= notification.notify_at.localtime.to_s(:db) %></td>
+        <% @notifications.each do |notification| %>
+          <tr style="height:25px;<%= "background-color:#E0E4CC;".html_safe if notification.state == 'sent' %>">
+            <td style="width:12%"><%= notification.state.humanize.downcase %></td>
+            <td style="width:18%"><%= notification.notify_at.localtime.to_s(:db) %></td>
+            <td style="width:18%"><%= notification.sent_at.localtime.to_s(:db) if notification.sent_at %></td>
             <td style="width:27%">
               <% if notification.issue %>
                 <%= link_to notification.issue.subject, notification.issue %>
+                <em>[<%= link_to notification.issue.project.name, notification.issue.project %>]</em>
               <% else %>
                 <em><%= l('notify.issue_deleted') %></em>
               <% end %>
             </td>
-            <td style="width:27%"><%= link_to notification.issue.project.name, notification.issue.project if notification.issue %></td>
-            <td style="width:20%"><%= link_to l('button_delete'), destroy_notification_path(id: notification.id), :method => :post, :class => "icon icon-del" %></td>
+            <td style="width:23%"><%= notification.try(:sidekiq_task_id) %></td>
+            <td style="width:30%;font-size:11px;padding-top:5px;"><%= link_to(l('button_delete'), destroy_notification_path(id: notification.id), :method => :post, :class => "icon icon-del") if notification.deletable? %></td>
           </tr>
         <% end %>
     </tbody>
   </table>
-  <p class="pagination" style="padding-top:12px;"><%= pagination_links_full @paginate_pending %></p>
+  <p class="pagination" style="padding-top:12px;"><%= pagination_links_full @paginate %></p>
 </div>
-<div class="splitcontentright">
-  <h2><%= t('notify.sent_list') %></h2>
-  <table class="list" style="margin-top:10px; width:95%;">
-    <thead>
-      <tr>
-        <th><%= l('notify.sent_at') %></th>
-        <th><%= l('label_issue') %></th>
-        <th><%= l('label_project') %></th>
-        <th><%= l('notify.jid') %></th>
-      </tr>
-    </thead>
-    <tbody>
-        <% @sent.each do |notification| %>
-          <tr style="height:25px;">
-            <td style="width:23%"><%= notification.sent_at.localtime.to_s(:db) %></td>
-            <td style="width:27%">
-              <% if notification.issue %>
-                <%= link_to notification.issue.subject, notification.issue %>
-              <% else %>
-                <em><%= l('notify.issue_deleted') %></em>
-              <% end %>
-            </td>
-            <td style="width:27%"><%= link_to notification.issue.project.name, notification.issue.project if notification.issue %></td>
-            <td style="width:23%"><%= notification.sidekiq_task_id %></td>
-          </tr>
-        <% end %>
-    </tbody>
-  </table>
-  <p class="pagination" style="padding-top:12px;"><%= pagination_links_full @paginate_sent %></p>
+<div class="splitcontentright" style="width:20%;">
+  <fieldset>
+    <legend><%= l('notify.filters') %></legend>
+    <%= form_tag user_notifications_path, method: :get do %>
+      <p>
+        <b><%= label_tag :date_lookup, l('notify.notify_at') %></b>
+        <span style="white-space:nowrap;">
+          <%= text_field_tag :date_lookup, params[:date_lookup], :autocomplete => 'off', :class => "basic-date-select" %>
+          <%= calendar_for('date_lookup') %>
+        </span>
+      </p>
+      <p>
+        <b><%= label_tag :state, l('notify.state') %></b>
+        <%= select_tag :state, options_for_select(Notification::STATE_OPTS.map{|s| [s.humanize.downcase, s]}, params[:state]), :include_blank => true, :class => 'selectize' %>
+      </p>
+      <p><%= submit_tag l('label_search') %></p>
+    <% end %>
+    <div class="contextual">
+      <%= link_to l('accounting.filters.reset'), user_notifications_path, class: "icon icon-reload" %>
+    </div>
+  </fieldset>
 </div>
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'notify_styles.css', :plugin => 'redmine_issue_notifications' %>
+  <%= javascript_include_tag 'selectize.min.js',   :plugin => 'redmine_issue_notifications' %>
+  <%= stylesheet_link_tag 'selectize.default.css', :plugin => 'redmine_issue_notifications' %>
+<% end %>
+
+<%= javascript_tag do %>
+  $('.selectize').selectize({
+    sortField: 'text'
+  });
+<% end %>

@@ -1,0 +1,9 @@
+.basic-date-select {
+  display: inline;
+  padding: 7px 0px;
+  width: 90%;
+  color: #555;
+  font-size: 1.2em;
+  border: 1px solid #ccc;
+  font-family: Helvetica, Arial, sans-serif;
+}

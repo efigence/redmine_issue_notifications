@@ -1,6 +1,7 @@
 pl:
   permission_create_notifications: Tworzenie notyfikacji
   notify:
+    notifications: Lista notyfikacji
     notification: Notyfikacja
     pending_list: Oczekujące notyfikacje
     sent_list: Wysłane notyfikacje
@@ -9,6 +10,7 @@ pl:
     issue_deleted: Zagadnienie usunięte
     jid: JID
     when: Kiedy chciałbyś otrzymać przypomnienie o tym zagadnieniu?
+    state: Status
     flash:
       deleted: Usunięto notyfikację.
       notice: Notyfikacja została zapisana.
@@ -16,3 +18,4 @@ pl:
     email:
       basic_subject: "Zagadnienie %{issue} wymaga Twojej uwagi."
       deleted_subject: Zagadnienie wymagające Twojej uwagi zostało usunięte.
+    filters: Filtry

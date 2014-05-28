@@ -5,13 +5,15 @@ class UserNotificationsController < ApplicationController
   before_filter :find_and_authorize_notification, :only => :destroy
 
   def index
-    @pending = @user.notifications.pending.order('notify_at ASC').
+    @notifications = @user.notifications.order("sent_at DESC, notify_at ASC").
       includes(:issue).includes(:issue => :project)
-    @paginate_pending, @pending = paginate @pending, :per_page => 15
 
-    @sent = @user.notifications.sent.order('notify_at DESC').
-      includes(:issue).includes(:issue => :project)
-    @paginate_sent, @sent = paginate @sent, :per_page => 15
+    if !params[:date_lookup].blank?
+      date = params[:date_lookup].to_date
+      @notifications = @notifications.where(notify_at: date..(date+1.day))
+    end
+    @notifications = @notifications.where(state: params[:state]) if !params[:state].blank?
+    @paginate, @notifications = paginate @notifications, :per_page => 15
   end
 
   def destroy

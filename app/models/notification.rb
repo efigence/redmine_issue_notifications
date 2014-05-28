@@ -1,7 +1,7 @@
 class Notification < ActiveRecord::Base
   unloadable
 
-  STATE_OPTS = %w(to_be_sent sending sent failed)
+  STATE_OPTS = %w(to_be_sent sending sent)
 
   belongs_to :user
   belongs_to :issue
@@ -21,6 +21,10 @@ class Notification < ActiveRecord::Base
   scope :sent, -> { where(state: 'sent') }
 
   scope :cleanupable, -> { sent.where('notify_at < ?', 1.month.ago) }
+
+  def deletable?
+    state == "to_be_sent"
+  end
 
   private
 

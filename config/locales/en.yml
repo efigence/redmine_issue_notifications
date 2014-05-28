@@ -1,6 +1,7 @@
 en:
   permission_create_notifications: Create notifications
   notify:
+    notifications: Notifications list
     notification: Notification
     pending_list: Pending notifications
     sent_list: Sent notifications
@@ -9,6 +10,7 @@ en:
     issue_deleted: Issue deleted
     jid: JID
     when: When would you like to be reminded about this issue?
+    state: Status
     flash:
       deleted: Notification deleted.
       notice: Notification saved.
@@ -16,3 +18,4 @@ en:
     email:
       basic_subject: "Issue %{issue} requires your attention."
       deleted_subject: Issue which required your attention was deleted.
+    filters: Filters
