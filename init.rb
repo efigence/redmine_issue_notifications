@@ -22,3 +22,4 @@ ActionDispatch::Callbacks.to_prepare do
 end
 
 require 'redmine_issue_notifications/hooks/show_issue_hook'
+require 'redmine_issue_notifications'

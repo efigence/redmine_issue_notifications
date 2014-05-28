@@ -14,4 +14,4 @@ en:
       error: "Error: couldn't save notification."
     email:
       basic_subject: "Issue %{issue} requires your attention."
-      deleted_subject:
+      deleted_subject: Issue which required your attention was deleted.

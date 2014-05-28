@@ -14,3 +14,4 @@ pl:
       error: "Błąd: notyfikacja nie została zapisana."
     email:
       basic_subject: "Zagadnienie %{issue} wymaga Twojej uwagi."
+      deleted_subject: Zagadnienie wymagające Twojej uwagi zostało usunięte.
