@@ -9,7 +9,6 @@ require_relative "./config/environment"
 require "clockwork"
 
 module Clockwork
-
   every(2.minutes, 'scheduling.job') do
     NotificationScheduleWorker.perform_async
   end

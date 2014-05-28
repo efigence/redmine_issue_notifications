@@ -8,6 +8,8 @@ Redmine::Plugin.register :redmine_issue_notifications do
   description 'Plugin for sending issue notifications'
   version '0.0.1'
 
+  requires_redmine :version_or_higher => '2.0.0'
+
   project_module :issue_tracking do
     permission :create_notifications,
       { :issues => [:create_notification] }, { :public => false, :require => :loggedin }
