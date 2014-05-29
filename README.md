@@ -14,8 +14,7 @@ To use this plugin you must install and configure `sidekiq` first, which is used
 After you successfully install `redmine_sidekiq`:
 
 1. Go to your Redmine installation's plugins/ directory.
-2. Clone this repo:
-3. `$ git clone https://github.com/efigence/redmine_issue_notifications`
+2. Clone this repo: `$ git clone https://github.com/efigence/redmine_issue_notifications`
 3. Go back to root directory.
 4. Install dependencies (`clockwork` & `daemons` gems): `$ bundle install`
 4. Migrate the database: `$ rake redmine:plugins:migrate RAILS_ENV=production`
