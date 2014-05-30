@@ -19,3 +19,4 @@ en:
       basic_subject: "Issue %{issue} requires your attention."
       deleted_subject: Issue which required your attention was deleted.
     filters: Filters
+    reset: reset filters
