@@ -9,7 +9,7 @@ Redmine > 2.0 is required.
 
 # Installation
 
-To use this plugin you must install and configure `sidekiq` first, which is used to schedule and send email notifications. To use `sidekiq` with redmine you should use `redmine_sidekiq` plugin. You can add it to redmine by following the instructions provided on its github page: https://github.com/ogom/redmine_sidekiq 
+To use this plugin you must install and configure `sidekiq` first, which is used to schedule and send email notifications. To use `sidekiq` with redmine you should use `redmine_sidekiq` plugin. You can add it to redmine by following the instructions provided on its github page: https://github.com/ogom/redmine_sidekiq
 
 After you successfully install `redmine_sidekiq`:
 
@@ -27,10 +27,28 @@ After you successfully install `redmine_sidekiq`:
 
 In `clockwork.rb` you can define how often should `sidekiq` be called to schedule pending emails sending process. Default interval is set to 2 minutes. You can read more about `clockwork` and its configuration here: https://github.com/tomykaira/clockwork
 
-Plugin also creates a new permission called `Create notifications`. By default members of all roles with `view_issue` privileges are allowed to create notifications. You can change this behaviour by visiting `Administration -> Roles and permissions` page.  
+Plugin also creates a new permission called `Create notifications`. By default members of all roles with `view_issue` privileges are allowed to create notifications. You can change this behaviour by visiting `Administration -> Roles and permissions` page.
 
 # Usage
 
 Visit issue page. Menu containing buttons `Edit`, `Log time`, `Watch`, etc should now be extended by `Notification` button. Simply click on the link and select when you would like to be reminded about the issue. On the chosen time you will receive email notification with the issue link.
 
 After creating a notification a top menu link `Notifications` will show up. Visit this page to see a list of all your scheduled and pending notifications.
+
+# License
+
+    Redmine context menu log time to project link plugin
+    Copyright (C) 2014  efigence S.A.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
