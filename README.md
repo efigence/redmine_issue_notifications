@@ -37,7 +37,7 @@ After creating a notification a top menu link `Notifications` will show up. Visi
 
 # License
 
-    Redmine context menu log time to project link plugin
+    Redmine Issue Notifications plugin
     Copyright (C) 2014  efigence S.A.
 
     This program is free software: you can redistribute it and/or modify
