@@ -18,7 +18,7 @@ module RedmineIssueNotifications
           @project = @issue.project
         end
         def create_notification
-          datetime_string = params[:notification][:notify_at]
+          datetime_string = params[:issue_notification][:notify_at]
           @notification.notify_at =
             if (time_zone = User.current.time_zone)
               time_zone.parse(datetime_string)

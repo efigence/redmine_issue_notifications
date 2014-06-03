@@ -1,6 +1,6 @@
 class CreateNotifications < ActiveRecord::Migration
   def change
-    create_table :notifications do |t|
+    create_table :issue_notifications do |t|
       t.integer :user_id
       t.integer :issue_id
       t.string :state, :nil => false, :default => "to_be_sent"

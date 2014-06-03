@@ -18,7 +18,7 @@ Redmine::Plugin.register :redmine_issue_notifications do
   menu :top_menu,
       :user_notifications,
       { :controller => 'user_notifications', :action => 'index' },
-      :caption => 'Notifications',
+      :caption => 'Issue Notifications',
       :if => Proc.new { User.current.logged? && User.current.notifications.any? }
 end
 

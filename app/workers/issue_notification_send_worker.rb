@@ -1,8 +1,12 @@
-class NotificationSendWorker
+class IssueNotificationSendWorker
   include Sidekiq::Worker
 
+  sidekiq_options queue: :issue_notifications,
+    backtrace: true
+
+
   def perform(id)
-    notification = Notification.find(id)
+    notification = IssueNotification.find(id)
     if notification.issue
       IssueNotificationMailer.sidekiq_delay.send_notification(id)
     else

@@ -46,7 +46,7 @@
       </p>
       <p>
         <b><%= label_tag :state, l('notify.state') %></b>
-        <%= select_tag :state, options_for_select(Notification::STATE_OPTS.map{|s| [s.humanize.downcase, s]}, params[:state]), :include_blank => true, :class => 'selectize' %>
+        <%= select_tag :state, options_for_select(IssueNotification::STATE_OPTS.map{|s| [s.humanize.downcase, s]}, params[:state]), :include_blank => true, :class => 'selectize' %>
       </p>
       <p><%= submit_tag l('label_search') %></p>
     <% end %>

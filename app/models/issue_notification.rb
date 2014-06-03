@@ -1,4 +1,4 @@
-class Notification < ActiveRecord::Base
+class IssueNotification < ActiveRecord::Base
   unloadable
 
   STATE_OPTS = %w(to_be_sent sending sent)

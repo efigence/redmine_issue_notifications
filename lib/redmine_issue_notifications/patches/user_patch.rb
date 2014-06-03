@@ -14,7 +14,7 @@ module RedmineIssueNotifications
       end
       module InstanceMethods
         def delete_issue_notifications
-          Notification.destroy_all(:user_id => self.id)
+          IssueNotification.destroy_all(:user_id => self.id)
         end
       end
     end

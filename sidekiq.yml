@@ -1,0 +1,27 @@
+# Sample configuration file for Sidekiq.
+# Options here can still be overridden by cmd line args.
+# sidekiq -C sidekiq.yml -i 0 -d -e ENV
+# eg:
+# sidekiq -C config/sidekiq.yml -i 0 -d -e production
+---
+:verbose: false
+:pidfile: ./tmp/pids/sidekiq.pid
+:logfile: ./log/sidekiq.log
+:concurrency:  6
+:queues:
+  - [default, 1]
+  - [issue_notifications, 5]
+  - [issue_notifications_schedule, 6]
+  - [issue_notifications_cleanup, 7]
+:limits:
+  issue_notifications_schedule: 1
+development:
+  :verbose: true
+  :concurrency: 3
+staging:
+  :logfile: /home/httpd/html/redmine/current/log/sidekiq.log
+  :pidfile: /home/httpd/html/redmine/current/tmp/pids/sidekiq.pid
+production:
+  :logfile: /home/httpd/html/redmine/current/log/sidekiq.log
+  :pidfile: /home/httpd/html/redmine/current/tmp/pids/sidekiq.pid
+

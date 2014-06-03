@@ -7,7 +7,7 @@ module RedmineIssueNotifications
         base.class_eval do
           unloadable
           base.send(:include, InstanceMethods)
-          has_many :notifications
+          has_many :notifications, class_name: 'IssueNotification'
         end
       end
       module InstanceMethods

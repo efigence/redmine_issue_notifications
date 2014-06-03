@@ -2,7 +2,7 @@
 class IssueNotificationMailer < Mailer
 
   def send_notification(id)
-    notification = Notification.find_by_id(id)
+    notification = IssueNotification.find_by_id(id)
     return unless notification
     @user, @issue = notification.user, notification.issue
     return unless @user && @user.active?
@@ -14,7 +14,7 @@ class IssueNotificationMailer < Mailer
   end
 
   def issue_deleted(id)
-    notification = Notification.find_by_id(id)
+    notification = IssueNotification.find_by_id(id)
     return unless notification
     @user = notification.user
     @url = user_notifications_url

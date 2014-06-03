@@ -25,7 +25,7 @@ class UserNotificationsController < ApplicationController
   private
 
   def find_and_authorize_notification
-    @notification = Notification.find(params[:id])
+    @notification = IssueNotification.find(params[:id])
     deny_access unless @notification.user == @user
   end
 
