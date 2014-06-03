@@ -22,6 +22,3 @@ staging:
   :logfile: /home/httpd/html/redmine/current/log/sidekiq.log
   :pidfile: /home/httpd/html/redmine/current/tmp/pids/sidekiq.pid
 production:
-  :logfile: /home/httpd/html/redmine/current/log/sidekiq.log
-  :pidfile: /home/httpd/html/redmine/current/tmp/pids/sidekiq.pid
-

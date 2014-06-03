@@ -20,8 +20,11 @@ After you successfully install `redmine_sidekiq`:
 4. Migrate the database: `$ rake redmine:plugins:migrate RAILS_ENV=production`
 5. Move `clockwork.rb` file to redmine root directory: `$ mv plugins/redmine_issue_notifications/clockwork.rb ./clockwork.rb`
 6. Restart Redmine.
-7. Start sidekiq: `$ bundle exec sidekiq`
-8. Start clockwork: `$ RAILS_ENV=production bundle exec clockworkd -c clockwork.rb -l --log-dir=log --pid-dir=tmp/pids -i redmine start`
+7. Move `sidekiq.yml` file to redmine config directory: `$ mv plugins/redmine_issue_notifications/sidekiq.yml ./config/sidekiq.yml`
+8. Start sidekiq: `$ bundle exec sidekiq -C config/sidekiq.yml -e production`
+9. Start clockwork: `$ RAILS_ENV=production bundle exec clockworkd -c clockwork.rb -l --log-dir=log --pid-dir=tmp/pids -i redmine start`
+
+You can find more information about clockwork [here](https://github.com/tomykaira/clockwork) and about sidekiq [here](https://github.com/mperham/sidekiq)
 
 # Configuration
 
