@@ -28,7 +28,7 @@ You can find more information about clockwork [here](https://github.com/tomykair
 
 # Configuration
 
-In `clockwork.rb` you can define how often should `sidekiq` be called to schedule pending emails sending process. Default interval is set to 2 minutes. You can read more about `clockwork` and its configuration here: https://github.com/tomykaira/clockwork
+In `clockwork.rb` you can define how often should `sidekiq` be called to schedule pending emails sending process. Default interval is set to 5 minutes. You can read more about `clockwork` and its configuration here: https://github.com/tomykaira/clockwork
 
 Plugin also creates a new permission called `Create notifications`. By default members of all roles with `view_issue` privileges are allowed to create notifications. You can change this behaviour by visiting `Administration -> Roles and permissions` page.
 
