@@ -5,7 +5,7 @@ class UserNotificationsController < ApplicationController
   before_filter :find_and_authorize_notification, :only => :destroy
 
   def index
-    @notifications = @user.notifications.order("sent_at DESC, notify_at ASC").
+    @notifications = @user.issue_notifications.order("sent_at DESC, notify_at ASC").
       includes(:issue).includes(:issue => :project)
 
     if !params[:date_lookup].blank?
