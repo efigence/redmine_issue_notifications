@@ -7,7 +7,7 @@ module RedmineIssueNotifications
         base.class_eval do
           unloadable
           base.send(:include, InstanceMethods)
-          has_many :notifications
+          has_many :issue_notifications
           before_destroy :delete_issue_notifications
           after_save :delete_issue_notifications, :if => Proc.new { self.status == User::STATUS_LOCKED }
         end
